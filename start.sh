@@ -33,4 +33,7 @@ npm -g install bower
 bower install --allow-root
 nohup npm start &
 
-# /bin/bash
+echo "### Processo de inicialização do container concluído!"
+echo "Acesse o dashboard no endereço http://<ip_container>:9000"
+echo "Para fechar o container, digite exit."
+/bin/bash
