@@ -24,4 +24,4 @@ Para coletar dados do tweeter, pode ser necessário aguardar alguns minutos ou h
 
 ## Como ver o relatório de tweets processados
 
-http://<ip_container>:9000
+http://ip_container:9000
