@@ -1,8 +1,10 @@
 #/bin/bash
 echo "### Starting Cassandra..."
 nohup $CASSANDRA_HOME/bin/cassandra -R &
+
 echo "### Starting Spark..."
 nohup $SPARK_HOME/sbin/start-master.sh &
+
 echo "### Aguardando Cassandra Iniciar..."
 opened=0
 while ! nc -vz localhost 9042; do
@@ -25,10 +27,10 @@ npm install
 nohup npm start &
 
 echo "### Iniciando dashboard web..."
-# cd /app/code/node/web
-# npm install
-# npm -g install bower
-# bower install --allow-root
-# nohup npm start &
+cd /app/code/node/web
+npm install
+npm -g install bower
+bower install --allow-root
+nohup npm start &
 
-/bin/bash
+# /bin/bash
