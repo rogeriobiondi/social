@@ -1,0 +1,141 @@
+<h1>&nbsp;&nbsp;&nbsp;Twitter Dashboard</h1>
+<input type="text" id="optionsTop5" ng-model="dados.top5.labels" ng-hide="true">
+<input type="text" id="dadosTop5"  ng-model="dados.top5.data" ng-hide="true">
+<input type="text" id="optionsTags" ng-model="dados.tags.labels" ng-hide="true">
+<input type="text" id="dadosTags"  ng-model="dados.tags.data" ng-hide="true">
+<input type="text" id="labelsDia" ng-value="dados.dia.labels" ng-hide="true">
+<input type="text" id="dadosDia"  ng-model="dados.dia.data" ng-hide="true">
+
+<script>
+  function atualizar() {
+    var opTop5 = document.getElementById("optionsTop5").value;
+    var optionsTop5 = opTop5.split(",");
+    var dadosTop5 = eval("[" + document.getElementById("dadosTop5").value + "]");
+    var ctxTop5 = document.getElementById("graficoTop5");
+    var graficoTop5 = new Chart(ctxTop5, {
+      type: 'bar',
+      data: {
+        labels: optionsTop5,
+        datasets: [{
+          label: 'Número Seguidores',
+          data: dadosTop5,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2
+        }]
+      }
+    });
+
+    var opTags = document.getElementById("optionsTags").value;
+    var optionsTags = opTags.split(",");
+    var dadosTags = eval("[" + document.getElementById("dadosTags").value + "]");
+    console.log(optionsTags);
+    console.log(dadosTags);
+    var ctxTags = document.getElementById("graficoTags");
+    var graficoTop5 = new Chart(ctxTags, {
+      type: 'bar',
+      data: {
+        labels: optionsTags,
+        datasets: [{
+          label: 'Tweets por Tag (lang = pt)',
+          data: dadosTags,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 2
+        }]
+      }
+    });
+
+    var labelsDia = eval("[" + document.getElementById("labelsDia").value + "]");
+    var dadosDia = eval("[" + document.getElementById("dadosDia").value + "]");
+    var ctx = document.getElementById("graficoDia");
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labelsDia,
+        datasets: [{
+          label: 'Quantidade de Tweets por Hora',
+          data:  dadosDia,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 2
+        }]
+      }
+    });
+  }
+
+  setTimeout(function(){ atualizar(); }, 1000);
+  setTimeout(function(){ location.reload(); }, 60000);
+</script>
+<!-- input type="button" value="Atualizar" onclick="javascript:atualizar();" -->
+
+<div class="container" ng-controller="TwitterCtrl">
+  <br />
+  <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9" >
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h4 class="text-center">Top 5 usuários com mais seguidores</h4>
+              </div>
+              <div class="panel-body text-center">
+                  <p class="lead">
+                      <canvas id="graficoTop5" width="400" height="200"></canvas>
+                  </p>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-9" >
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h4 class="text-center">Tags (lang = pt)</h4>
+              </div>
+              <div class="panel-body text-center">
+                  <p class="lead">
+                    <canvas id="graficoTags" width="400" height="200"></canvas>
+                  </p>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-9" >
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h4 class="text-center">Tweets por Hora</h4>
+              </div>
+              <div class="panel-body text-center">
+                  <p class="lead">
+                    <canvas id="graficoDia" width="400" height="200"></canvas>
+                  </p>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-9" >
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h4 class="text-center">Últimos Tweets</h4>
+              </div>
+              <div class="panel-body text-left">
+                  <p class="lead">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Autor</th>
+                          <th>Followers</th>
+                          <th>Tag</th>
+                          <th>Tweet</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="linha in dados.ultimos10">
+                          <td>{{linha.autor}}</td>
+                          <td>{{linha.numero_followers}}</td>
+                          <td>{{linha.tag}}</td>
+                          <td>{{linha.texto}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

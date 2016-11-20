@@ -1,0 +1,26 @@
+{
+    "name": "microservice",
+    "version": "1.0.0",
+    "description": "Microserviço REST/JSON teste",
+    "author": "Rogerio Biondi <rogerio.biondi@gmail.com>",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/rogeriobiondi/social"
+    },
+    "main": "microservice.js",
+    "scripts": {
+      "start": "node microservice.js"
+    },
+    "bugs": {
+      "url": "https://github.com/rogeriobiondi/social/issues"
+    },
+    "dependencies": {
+        "express": "~4.0.0",
+        "body-parser": "~1.0.1",
+        "cassandra-driver": "~3.1.6",
+        "async": "~2.1.2",
+        "lodash": "~4.17.2",
+        "cors": "~2.8.1"
+    },
+    "license": "MIT"
+}
